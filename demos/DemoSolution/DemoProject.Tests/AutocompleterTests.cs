@@ -12,7 +12,8 @@ class Car
 public class AutocompleterTests
 {
 	private List<Car> _data = null!;
-
+	private NepNavigateService _navigateServiceMock = null!;
+	
 	[TestInitialize]
 	public void Init()
 	{
@@ -34,11 +35,7 @@ public class AutocompleterTests
 	[TestMethod]
 	public void Autocomplete_HappyFlow_GivesSuggestions()
 	{
-		var sut = new Autocompleter<Car>
-		{
-			Query = "olk",
-			Data = _data
-		};
+		var sut = ArrangeSut("olk");
 
 		sut.Autocomplete();
 
@@ -54,11 +51,7 @@ public class AutocompleterTests
 	[TestMethod]
 	public void Autocomplete_QueryWithNoMatches_EmptySuggestions()
 	{
-		var sut = new Autocompleter<Car>
-		{
-			Query = "wertyuiopuytrrftgh",
-			Data = _data
-		};
+		var sut = ArrangeSut("wertyuiopuytrrftgh");
 
 		sut.Autocomplete();
 
@@ -68,11 +61,7 @@ public class AutocompleterTests
 	[TestMethod]
 	public void Autocomplete_EmptyQuery_EmptySuggestions()
 	{
-		var sut = new Autocompleter<Car>
-		{
-			Query = "wertyuiopuytrrftgh",
-			Data = _data
-		};
+		var sut = ArrangeSut(string.Empty);
 
 		sut.Autocomplete();
 
@@ -82,11 +71,7 @@ public class AutocompleterTests
 	[TestMethod]
 	public void Autocomplete_QueryMatchesMultipleProperties_AddsSuggestionsUniquely()
 	{
-		var sut = new Autocompleter<Car>
-		{
-			Query = "o",
-			Data = _data
-		};
+		var sut = ArrangeSut("o");
 
 		sut.Autocomplete();
 
@@ -115,9 +100,22 @@ public class AutocompleterTests
 		sut.Suggestions.Should().BeEquivalentTo(expected);
 	}
 
+	[TestMethod]
+	public void Next_BasicSuggestions_NavigateServiceUsedAndReturnValueStored()
+	{
+		var sut = ArrangeSut("e");
+		sut.Autocomplete();
+		
+		sut.Next();
+
+		sut.ActiveSuggestionIndex.Should().Be(42);
+		_navigateServiceMock.HasNextBeenCalled.Should().BeTrue();
+	}
+
 	private Autocompleter<Car> ArrangeSut(string query)
 	{
-		return new Autocompleter<Car>
+		_navigateServiceMock = new NepNavigateService();
+		return new Autocompleter<Car>(_navigateServiceMock)
 		{
 			Query = query,
 			Data = _data
