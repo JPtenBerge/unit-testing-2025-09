@@ -46,5 +46,5 @@ verschillen zijn vooral merkbaar als je nog de Assert-class handmatig aanspreekt
 
 - Svelte die integratietesten "unittesten" noemt: https://www.sveltesociety.dev/recipes/testing-and-debugging/unit-testing-svelte-component
   - React en Vue doen op dezelfde manier ook HTML renderen als unittesten wegzetten
-
+- [Bowling Kata](https://codingdojo.org/kata/Bowling/) voor TDD
 
