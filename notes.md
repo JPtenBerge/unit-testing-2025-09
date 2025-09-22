@@ -42,6 +42,50 @@ verschillen zijn vooral merkbaar als je nog de Assert-class handmatig aanspreekt
 - [Shouldly](https://docs.shouldly.org/)
   - Gesponsord door Info Support
 
+
+## Test-driven development
+
+Een werkwijze!
+
+1. Schrijf een test
+   - bug
+   - nieuwe feature - heul wat tests (elke story/edge case)
+2. Draai de test en zie dat hij faalt (rood)
+3. Schrijf code   / bare minimum
+4. Draai de test/alle tests en zie dat hij slaagt (groen)
+5. Refactor
+
+Repeat.
+
+waarom?
+
+- deadlines.
+  - technical debt.
+- forceert nadenken.
+- werkt beter design in de hand
+
+wanneer niet?
+
+- geen idee hoe je project eruit gaat zien / architectuur
+  - zoek het uit en pak dan TDD op
+
+PoC proof of concept
+
+>"niets is zo permanent als een tijdelijke oplossing"
+
+## Mocking
+
+Nabootsen van een dependency om gedrag consistent te hebben
+
+Test double:
+- Stubs: geen implementatie. interacties registreren
+- Fakes: altijd nepdata terug
+- Mocks: gedrag nabootsen
+- Dummies: als je 6 parameters mee moet geven, maar je bent enkel geinteresseerd in wat er met 
+  de eerste 3 gebeurt, dan moet je 3 nutteloze parameters mee gooien
+
+IRL hebben mensen het altijd over mocking/mocks. Er zijn genoeg mockframeworks en geen 1 "test double framework".
+
 ## Coole links
 
 - Svelte die integratietesten "unittesten" noemt: https://www.sveltesociety.dev/recipes/testing-and-debugging/unit-testing-svelte-component
