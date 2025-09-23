@@ -122,7 +122,7 @@ public void DoeDoeNiet()
 
 ## Wat er is lastig is qua testen
 
-- testdata   bij heul veul tests
+- testdata bij heul veul tests
 - static
 
 ```cs
@@ -145,18 +145,43 @@ DateTime.Now
 - TypeMock ($$$)
 - `IDateWrapperService`
   ```cs
-	class DateWrapperService : IDateWrapperService
-	{
-		public DateTime Geef()
-		{
-			return DateTime.Now;
-		}
-	}
+  class DateWrapperService : IDateWrapperService
+  {
+  	public DateTime Geef()
+  	{
+  		return DateTime.Now;
+  	}
+  }
   ```
 
+## Mockframeworks
+
+- Moq
+  - [had wel een incidentje in 2023 waar ze een build warning gooiden als jij geen sponsor was](https://www.reddit.com/r/dotnet/comments/15ljdcc/does_moq_in_its_latest_version_extract_and_send/)
+- NSubstitute
+- FakeItEasy
+
+## Mutation testing
+
+Het testen van je tests.
+
+kleine aanpassing in code maken en kijken of er tests falen
+
+```cs
+// productiecode
+if (x > 4) { ... }
+
+// mutanten
+if (x < 4) { ... }
+if (x >= 4) { ... }
+if (x > 4000) { ... }
+```
 
 ## Coole links
 
 - Svelte die integratietesten "unittesten" noemt: https://www.sveltesociety.dev/recipes/testing-and-debugging/unit-testing-svelte-component
   - React en Vue doen op dezelfde manier ook HTML renderen als unittesten wegzetten
 - [Bowling Kata](https://codingdojo.org/kata/Bowling/) voor TDD
+- [Testcontainers op Docker Hub](https://hub.docker.com/search?q=testcontainers)
+- [Voorbeeldjes Postgres testcontainer](https://dotnet.testcontainers.org/modules/postgres/)
+- [Teststrategieen EF Core](https://learn.microsoft.com/en-us/ef/core/testing/choosing-a-testing-strategy)
