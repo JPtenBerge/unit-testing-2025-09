@@ -7,4 +7,11 @@ public class UnitTest1
 	{
 		Assert.Equal("hoi", "doei");
 	}
+
+	[Theory]
+	[InlineData(4, 8, 12)]
+	public void DataDriven(int n1, int n2, int expected)
+	{
+		
+	}
 }
